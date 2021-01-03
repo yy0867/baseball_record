@@ -1,9 +1,12 @@
 package com.harry.yaguban;
 
+import android.annotation.SuppressLint;
+
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Game {
+public class Game implements Serializable {
     public Game(String homeTeam, String awayTeam, Date date) {
         this.date = date;
         this.homeTeam = homeTeam;
@@ -18,7 +21,8 @@ public class Game {
     //Getter
     public String getDateString() {
         //Get Date Information to String [2020년 1월 1일 15시]
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy년 MM월 dd일 HH시");
+        @SuppressLint("SimpleDateFormat")
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy년 MM월 dd일");
         return dateFormat.format(this.date);
     }
 
@@ -48,8 +52,6 @@ public class Game {
         }
     }
 
-    public boolean isGameFinish() { return inning > 9 ? true : false; }
-
     //private Func
     private void plusOut() { curOut = (curOut + 1) % maxOut; }
     private boolean isThreeOut(int curOut) { return curOut == maxOut; }
@@ -59,12 +61,12 @@ public class Game {
     static final int maxOut = 3;
     static final boolean home = true;
     static final boolean away = false;
-    private String homeTeam;
-    private String awayTeam;
-    private int scoreHome[];
-    private int scoreAway[];
+    private final String homeTeam;
+    private final String awayTeam;
+    private int[] scoreHome;
+    private int[] scoreAway;
     private int curInning;
     private int curOut;
     private boolean curAttackTeam;
-    private Date date;
+    private final Date date;
 }

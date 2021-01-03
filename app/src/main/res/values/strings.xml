@@ -4,4 +4,12 @@
     <string name="add_game">경기 추가</string>
     <string name="each_record">경기 별 기록 보기</string>
     <string name="manage_player">선수 관리</string>
+
+    <!-- Add Information Input Activity -->
+    <string name="input_opponent">상대 학교</string>
+    <string name="input_date">경기 일시</string>
+    <string name="select_date">날짜 선택</string>
+    <string name="hint_opponent">**대학교</string>
+    <string name="start_game">경기 시작</string>
+    <string name="is_hometeam">홈팀인가요?</string>
 </resources>
