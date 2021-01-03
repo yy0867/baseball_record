@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">야구반 기록관리</string>
+    <string name="total_record">전체 선수 기록 보기</string>
+    <string name="add_game">경기 추가</string>
+    <string name="each_record">경기 별 기록 보기</string>
+    <string name="manage_player">선수 관리</string>
 </resources>
