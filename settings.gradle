@@ -1,0 +1,2 @@
+include ':app'
+rootProject.name = "야구반 기록관리"

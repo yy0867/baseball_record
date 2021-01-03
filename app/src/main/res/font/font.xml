@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<font-family xmlns:android="http://schemas.android.com/apk/res/android">
+    <font
+        android:font="@font/bccardlight"
+        android:fontWeight="400"
+        android:fontStyle="normal"
+        android:name="bclight"/>
+    <font
+        android:font="@font/bccardbold"
+        android:fontWeight="400"
+        android:fontStyle="normal"
+        android:name="bcbold"/>
+</font-family>
