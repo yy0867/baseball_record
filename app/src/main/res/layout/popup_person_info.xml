@@ -14,6 +14,7 @@
             android:text="이름"
             android:textSize="20sp"
             android:gravity="center"
+            android:fontFamily="@font/bccardlight"
             android:layout_width="90dp"
             android:layout_height="45dp"
             android:layout_marginLeft="16dp" />
@@ -21,6 +22,7 @@
         <TextView
             android:text="포지션"
             android:textSize="20sp"
+            android:fontFamily="@font/bccardlight"
             android:gravity="center"
             android:layout_width="90dp"
             android:layout_height="45dp"
@@ -29,6 +31,7 @@
         <TextView
             android:text="등번호"
             android:textSize="20sp"
+            android:fontFamily="@font/bccardlight"
             android:gravity="center"
             android:layout_width="90dp"
             android:layout_height="45dp"
@@ -43,21 +46,24 @@
 
         <EditText
             android:id="@+id/personName"
+            android:fontFamily="@font/bccardlight"
             android:layout_width="150dp"
             android:layout_height="45dp"
             android:layout_marginLeft="8dp"
-            android:hint="이름"/>
+            android:hint="@string/personinfo_name"/>
         <Spinner
             android:id="@+id/position"
+            android:fontFamily="@font/bccardlight"
             android:layout_width="150dp"
             android:layout_height="45dp"
             android:entries="@array/position"
             android:layout_marginLeft="8dp"/>
         <EditText
             android:id="@+id/backNumber"
+            android:fontFamily="@font/bccardlight"
             android:layout_width="150dp"
             android:layout_height="45dp"
             android:layout_marginLeft="8dp"
-            android:hint="등번호"/>
+            android:hint="@string/personinfo_backnumber"/>
     </LinearLayout>
 </LinearLayout>
