@@ -32,6 +32,7 @@ public class Game implements Serializable {
     public String getCurDefenseTeam() { return curAttackTeam == home ? awayTeam : homeTeam; }
     public String getHomeTeam() { return homeTeam; }
     public String getAwayTeam() { return awayTeam; }
+    public String getOpponentTeam() { return homeTeam.equals(ourTeam) ? awayTeam : homeTeam; }
 
     //Setter
     public void setScoreHome() { scoreHome[curInning]++; }
@@ -61,6 +62,7 @@ public class Game implements Serializable {
     static final int maxOut = 3;
     static final boolean home = true;
     static final boolean away = false;
+    static final String ourTeam = "광운대학교";
     private final String homeTeam;
     private final String awayTeam;
     private int[] scoreHome;

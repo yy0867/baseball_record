@@ -12,4 +12,15 @@
     <string name="hint_opponent">**대학교</string>
     <string name="start_game">경기 시작</string>
     <string name="is_hometeam">홈팀인가요?</string>
+
+    <!-- Play Game Activity -->
+    <string name="hit_1">안타</string>
+    <string name="hit_2">2루타</string>
+    <string name="hit_3">3루타</string>
+    <string name="homerun">홈런</string>
+    <string name="ball_4">볼넷</string>
+    <string name="strikeout">삼진</string>
+    <string name="rbi">타점</string>
+    <string name="out">아웃</string>
+    <string name="batter">타자</string>
 </resources>

@@ -11,4 +11,5 @@
     <color name="status_color">#511818</color>
     <color name="second_color">#7A4F4F</color>
     <color name="background_color">#E6F2FF</color>
+    <color name="table_color">#F6F2D1</color>
 </resources>
