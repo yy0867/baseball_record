@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="position">
+        <item>투수</item>
+        <item>포수</item>
+        <item>1루수</item>
+        <item>2루수</item>
+        <item>3루수</item>
+        <item>유격수</item>
+        <item>좌익수</item>
+        <item>중견수</item>
+        <item>우익수</item>
+        <item>지명타자</item>
+    </string-array>
+</resources>
