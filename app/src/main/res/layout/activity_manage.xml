@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ManageActivity"
     android:background="@color/background_color">
-
+    
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="680dp"
@@ -49,6 +49,9 @@
         android:layout_height="wrap_content"
         android:onClick="buttonPersonAddClicked"
         android:text="+"
+        android:fontFamily="@font/bccardbold"
+        android:textStyle="bold"
+        android:textSize="25sp"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -61,6 +64,9 @@
         android:layout_height="wrap_content"
         android:onClick="buttonPersonRemoveClicked"
         android:text="-"
+        android:fontFamily="@font/bccardbold"
+        android:textStyle="bold"
+        android:textSize="25sp"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void buttonAddClicked(View v) {
-        startActivity(new Intent(this, AddActivity.class));
+        startActivity(new Intent(this, AddInformationInputActivity.class));
     }
 
     public void buttonEachClicked(View v) {
