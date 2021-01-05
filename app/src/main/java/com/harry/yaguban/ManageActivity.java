@@ -3,12 +3,9 @@ package com.harry.yaguban;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.res.ResourcesCompat;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
@@ -23,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
+import android.widget.TableRow.LayoutParams;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -30,8 +28,7 @@ import java.util.ArrayList;
 public class ManageActivity extends AppCompatActivity {
 
     TableLayout person_list_layout;
-    ArrayList<TextView> person_list;
-    TextView textView;
+    ArrayList<TableRow> person_list;
 
     String name, position, backNum;
     @Override
@@ -77,27 +74,32 @@ public class ManageActivity extends AppCompatActivity {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private void addOnePerson(){
-        person_list_layout=findViewById(R.id.personListLayout);
-        person_list_layout.setGravity(Gravity.CENTER);
+    private void addOnePerson() {
+        person_list_layout = findViewById(R.id.personListLayout);
+        TableRow tableRow = new TableRow(this);
+        person_list.add(tableRow);
 
-        textView = new TextView(this);
-        textView.setText(name+"     "+position+"     "+backNum);
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP,28);
-        textView.setTextColor(Color.parseColor("#7A4F4F"));
-        textView.setGravity(Gravity.CENTER);
-        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT
-        );
-        textView.setLayoutParams(params);
-        textView.setBackgroundColor(Color.parseColor("#E6F2FF"));
-        textView.setBackgroundResource(R.drawable.bordered_text);
-        textView.setPadding(5,10,10,5);
+        for (int i = 0; i < 3; ++i) {
+            TextView textView = new TextView(this);
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 28);
+            textView.setTextColor(Color.parseColor("#7A4F4F"));
+            textView.setGravity(Gravity.LEFT);
+            textView.setBackgroundResource(R.drawable.bordered_text);
+            textView.setPadding(15, 30, 10, 30);
+            Typeface face = getResources().getFont(R.font.bccardbold);
+            textView.setTypeface(face);
+            switch (i) {
+                case 0: textView.setText(name); break;
+                case 1: textView.setText(position); break;
+                case 2: textView.setText(backNum); break;
+            }
+            TableLayout.LayoutParams params = new TableLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT);
+            params.setMargins(0,30,0,0);
+            tableRow.setLayoutParams(params);
+            tableRow.addView(textView);
+        }
 
-        Typeface face= getResources().getFont(R.font.bccardbold);
-        textView.setTypeface(face);
-
-        person_list.add(textView);
-        person_list_layout.addView(textView);
+        person_list_layout.addView(tableRow);
     }
 }
