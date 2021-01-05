@@ -29,7 +29,7 @@ import java.util.ArrayList;
 
 public class ManageActivity extends AppCompatActivity {
 
-    LinearLayout person_list_layout;
+    TableLayout person_list_layout;
     ArrayList<TextView> person_list;
     TextView textView;
 
@@ -84,7 +84,16 @@ public class ManageActivity extends AppCompatActivity {
         textView = new TextView(this);
         textView.setText(name+"     "+position+"     "+backNum);
         textView.setTextSize(TypedValue.COMPLEX_UNIT_SP,28);
-        textView.setTextColor(Color.parseColor("#FF000000"));
+        textView.setTextColor(Color.parseColor("#7A4F4F"));
+        textView.setGravity(Gravity.CENTER);
+        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT
+        );
+        textView.setLayoutParams(params);
+        textView.setBackgroundColor(Color.parseColor("#E6F2FF"));
+        textView.setBackgroundResource(R.drawable.bordered_text);
+        textView.setPadding(5,10,10,5);
+
         Typeface face= getResources().getFont(R.font.bccardbold);
         textView.setTypeface(face);
 
