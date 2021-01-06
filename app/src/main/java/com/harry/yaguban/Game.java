@@ -37,6 +37,7 @@ public class Game implements Serializable {
     //Setter
     public void setScoreHome() { scoreHome[curInning]++; }
     public void setScoreAway() { scoreAway[curInning]++; }
+    public void changeCurAttackTeam() { curAttackTeam = !curAttackTeam; }
 
     //public Func
     public void increaseOut() {
