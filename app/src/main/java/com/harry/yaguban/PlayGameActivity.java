@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 public class PlayGameActivity extends AppCompatActivity {
     Game newGame;
+    boolean isDefense;
+    TextView textBatPitch;
     SwitchCompat switchBatPitch;
 
     @Override
@@ -22,24 +24,24 @@ public class PlayGameActivity extends AppCompatActivity {
 
         TextView opponentTeamName = findViewById(R.id.textviewVS);
         switchBatPitch = findViewById(R.id.switchBatPitch);
+        textBatPitch = findViewById(R.id.textviewBatPitch);
 
         newGame = (Game)intent.getSerializableExtra("objectGame");
 
-        //away team batting first
-        changeStatus(!newGame.getAwayTeam().equals(Game.ourTeam));
+        //first defense -> first pitcher
+        isDefense = newGame.getHomeTeam().equals(Game.ourTeam);
+        switchBatPitch.setChecked(isDefense);
+        changeBatPitchText();
 
         String vsTeamName = "vs " + newGame.getOpponentTeam();
         opponentTeamName.setText(vsTeamName);
     }
 
-    //change Bat / Pitch
-    void changeStatus(boolean isPitching) {
-        if (isPitching) {
-            switchBatPitch.setChecked(false);
-            switchBatPitch.setText("타자");
+    private void changeBatPitchText() {
+        if (isDefense) {
+            textBatPitch.setText("투수");
         } else {
-            switchBatPitch.setChecked(true);
-            switchBatPitch.setText("투수");
+            textBatPitch.setText("타자");
         }
     }
 
@@ -85,6 +87,9 @@ public class PlayGameActivity extends AppCompatActivity {
 
     //투타 변경
     public void batPitchSwitchClicked(View v) {
-
+        isDefense = !isDefense;
+        switchBatPitch.setChecked(isDefense);
+        newGame.changeCurAttackTeam();
+        changeBatPitchText();
     }
 }

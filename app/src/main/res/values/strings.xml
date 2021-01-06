@@ -23,6 +23,7 @@
     <string name="rbi">타점</string>
     <string name="out">아웃</string>
     <string name="batter">타자</string>
+    <string name="pitcher">투수</string>
 
     <!-- Person Info Activity -->
     <string name="personinfo_name">이름</string>

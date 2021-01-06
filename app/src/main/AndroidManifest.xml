@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_baseball_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.야구반기록관리">
-        <activity android:name=".PlayGameActivity"/>
+        <activity android:name=".PlayGameActivity" />
         <activity
             android:name=".DateSelectPopupActivity"
             android:theme="@style/Theme.AppCompat.Light.Dialog" />

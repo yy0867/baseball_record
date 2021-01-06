@@ -29,12 +29,25 @@
                 android:layout_gravity="start"
                 android:fontFamily="@font/bccardbold"
                 android:paddingTop="10dp"
-                android:text=" vs 서울대학교"
+                android:text=""
                 android:textColor="@color/teal_700"
                 android:textSize="25sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:id="@+id/textviewBatPitch"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="2dp"
+                android:fontFamily="@font/bccardbold"
+                android:gravity="center"
+                android:text="@string/batter"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toStartOf="@+id/switchBatPitch" />
 
             <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/switchBatPitch"
@@ -43,7 +56,6 @@
                 android:fontFamily="@font/bccardlight"
                 android:onClick="batPitchSwitchClicked"
                 android:paddingBottom="5dp"
-                android:text="@string/batter"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -52,7 +64,7 @@
 
         <TableLayout
             android:layout_width="match_parent"
-            android:layout_height="500dp"
+            android:layout_height="470dp"
             android:background="@color/table_color">
 
 
@@ -60,72 +72,62 @@
 
         <TableLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-
+            android:layout_height="wrap_content">
                 <!-- Set Layout Width -->
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <Button
-                        android:id="@+id/buttonHit1"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
-                        android:layout_weight="4"
-                        android:fontFamily="@font/bccardbold"
-                        android:onClick="hit1Clicked"
-                        android:text="@string/hit_1" />
+                <Button
+                    style="?android:attr/button"
+                    android:id="@+id/buttonHit1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="4"
+                    android:fontFamily="@font/bccardbold"
+                    android:onClick="hit1Clicked"
+                    android:text="@string/hit_1" />
 
-                    <Button
-                        android:id="@+id/buttonHit2"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
-                        android:layout_weight="4"
-                        android:fontFamily="@font/bccardbold"
-                        android:onClick="hit2Clicked"
-                        android:text="@string/hit_2" />
+                <Button
+                    style="?android:attr/button"
+                    android:id="@+id/buttonHit2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="4"
+                    android:fontFamily="@font/bccardbold"
+                    android:onClick="hit2Clicked"
+                    android:text="@string/hit_2" />
 
-                    <Button
-                        android:id="@+id/buttonHit3"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
-                        android:layout_weight="4"
-                        android:fontFamily="@font/bccardbold"
-                        android:onClick="hit3Clicked"
-                        android:text="@string/hit_3" />
+                <Button
+                    style="?android:attr/button"
+                    android:id="@+id/buttonHit3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="4"
+                    android:fontFamily="@font/bccardbold"
+                    android:onClick="hit3Clicked"
+                    android:text="@string/hit_3" />
 
-                    <Button
-                        android:id="@+id/buttonHomerun"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
-                        android:layout_weight="4"
-                        android:fontFamily="@font/bccardbold"
-                        android:onClick="homerunClicked"
-                        android:text="@string/homerun" />
+                <Button
+                    style="?android:attr/button"
+                    android:id="@+id/buttonHomerun"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="4"
+                    android:fontFamily="@font/bccardbold"
+                    android:onClick="homerunClicked"
+                    android:text="@string/homerun" />
 
                 </LinearLayout>
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-
                 <!-- Set Layout Width -->
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -133,6 +135,7 @@
                     android:orientation="horizontal">
 
                     <Button
+                        style="?android:attr/button"
                         android:id="@+id/buttonBall4"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -144,6 +147,7 @@
                         android:text="@string/ball_4" />
 
                     <Button
+                        style="?android:attr/button"
                         android:id="@+id/buttonStrikeout"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -155,6 +159,7 @@
                         android:text="@string/strikeout" />
 
                     <Button
+                        style="?android:attr/button"
                         android:id="@+id/buttonRBI"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -166,6 +171,7 @@
                         android:text="@string/rbi" />
 
                     <Button
+                        style="?android:attr/button"
                         android:id="@+id/buttonOut"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -177,9 +183,14 @@
                         android:text="@string/out" />
 
                 </LinearLayout>
-
-            </TableRow>
         </TableLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
 
