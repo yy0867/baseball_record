@@ -28,4 +28,7 @@
     <!-- Person Info Activity -->
     <string name="personinfo_name">이름</string>
     <string name="personinfo_backnumber">등번호</string>
+
+    <!-- App repository -->
+    <string name="person_repository_name">선수 목록</string>
 </resources>

@@ -7,23 +7,86 @@
     tools:context=".ManageActivity"
     android:background="@color/background_color">
 
-    <ScrollView
+    <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
-        android:layout_height="680dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/toolbarManage"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/bccardbold"
+            android:textSize="26sp"
+            android:text="선수 관리">
+
+        </TextView>
+    </androidx.appcompat.widget.Toolbar>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/status_color"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarManage"
+        tools:layout_editor_absoluteX="20dp">
+
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="50dp"
+            android:fontFamily="@font/bccardbold"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="이름"
+            android:textColor="@color/white"
+            android:textSize="28sp" />
+
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="50dp"
+            android:fontFamily="@font/bccardbold"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="포지션"
+            android:textColor="@color/white"
+            android:textSize="28sp" />
+
+        <TextView
+            android:layout_width="129dp"
+            android:layout_height="50dp"
+            android:fontFamily="@font/bccardbold"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="등번호"
+            android:textColor="@color/white"
+            android:textSize="28sp" />
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="580dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintVertical_bias="0.682">
+
         <TableLayout
             android:id="@+id/personListLayout"
             android:layout_width="match_parent"
-            android:layout_height="680dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="20dp"
+            android:layout_height="580dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginRight="20dp"
             android:layout_marginBottom="20dp"
+            android:stretchColumns="*"
             android:gravity="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -32,33 +95,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0">
 
-        <TableRow>
-            <TextView
-                android:layout_width="120dp"
-                android:layout_height="50dp"
-                android:gravity="left"
-                android:textSize="28sp"
-                android:fontFamily="@font/bccardbold"
-                android:textColor="@color/purple_700"
-                android:text="이름"/>
-            <TextView
-                android:layout_width="120dp"
-                android:layout_height="50dp"
-                android:gravity="left"
-                android:textSize="28sp"
-                android:fontFamily="@font/bccardbold"
-                android:textColor="@color/purple_700"
-                android:text="포지션"/>
-            <TextView
-                android:layout_width="120dp"
-                android:layout_height="50dp"
-                android:gravity="left"
-                android:textSize="28sp"
-                android:fontFamily="@font/bccardbold"
-                android:textColor="@color/purple_700"
-                android:text="등번호"/>
-        </TableRow>
-        </TableLayout>>
+        </TableLayout>
     </ScrollView>
 
     <Button
@@ -90,11 +127,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.72"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="3dp"
-        tools:layout_editor_absoluteY="1dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
