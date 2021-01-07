@@ -9,6 +9,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
@@ -21,6 +22,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -45,9 +47,10 @@ public class ManageActivity extends AppCompatActivity {
 
     TableLayout person_list_layout;
     ArrayList<TableRow> person_list;
-    ArrayList<String> person_info;
+    ArrayList<Person> person_info;
+    ArrayList<CheckBox> delete_checks;
     final String listRepository="managePersonList";
-    String name, position, backNum;
+    Person person;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -56,6 +59,7 @@ public class ManageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_manage);
         person_list = new ArrayList<>();
         person_info = new ArrayList<>();
+        delete_checks = new ArrayList<>();
 
         initializeToolBar();
         getPersonList();
@@ -68,14 +72,21 @@ public class ManageActivity extends AppCompatActivity {
     public void buttonPersonRemoveClicked(View v){
         person_list_layout=findViewById(R.id.personListLayout);
 
-        int lastIndex = person_list.size()-1;
-        if(lastIndex<0)return;
-
-        person_list_layout.removeView(person_list.get(lastIndex));
-        person_list.remove(lastIndex);
-
-        for(int i=0;i<3;++i){
-            person_info.remove(person_info.size()-1);
+        for(int i=0;i<delete_checks.size();++i){
+            if(delete_checks.get(i).isChecked()){
+                person_list_layout.removeView(person_list.get(i));
+                person_list.remove(i);
+                person_info.remove(i);
+                delete_checks.remove(i);
+                --i;
+            }
+        }
+        for(int i=0;i<person_list.size();++i){
+            switch(i%2)
+            {
+                case 0: person_list.get(i).setBackgroundResource(R.drawable.person_table_row_design_odd); break;
+                case 1: person_list.get(i).setBackgroundResource(R.drawable.person_table_row_design); break;
+            }
         }
     }
 
@@ -111,10 +122,11 @@ public class ManageActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                name=pName.getText().toString();
-                position=pos.getSelectedItem().toString();
-                backNum=bNum.getText().toString();
-                person_info.add(name); person_info.add(position); person_info.add(backNum);
+                String name=pName.getText().toString();
+                String position=pos.getSelectedItem().toString();
+                String backNum=bNum.getText().toString();
+                person = new Person(name,position,backNum);
+                person_info.add(person);
                 addOnePerson();
             }
         }).setNegativeButton("취소",null).show();
@@ -132,8 +144,14 @@ public class ManageActivity extends AppCompatActivity {
             case 1: tableRow.setBackgroundResource(R.drawable.person_table_row_design_odd); break;
         }
 
+        CheckBox deleteCheck = new CheckBox(this);
+        delete_checks.add(deleteCheck);
+        deleteCheck.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#711F1F")));
+        tableRow.addView(deleteCheck);
+
         for (int i = 0; i < 3; ++i) {
             TextView textView = new TextView(this);
+            textView.setWidth(120); textView.setHeight(120);
             textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
             textView.setTextColor(Color.parseColor("#7A4F4F"));
             textView.setGravity(Gravity.LEFT);
@@ -142,9 +160,9 @@ public class ManageActivity extends AppCompatActivity {
             textView.setTypeface(face);
 
             switch (i) {
-                case 0: textView.setText(name); break;
-                case 1: textView.setText(position); break;
-                case 2: textView.setText(backNum); break;
+                case 0: textView.setText(person.getName()); break;
+                case 1: textView.setText(person.getPosition()); break;
+                case 2: textView.setText(person.getBackNum()); break;
             }
             tableRow.addView(textView);
         }
@@ -169,7 +187,7 @@ public class ManageActivity extends AppCompatActivity {
             else{
                 for(int i=0;i<person_info.size();++i)
                 {
-                    String temp=person_info.get(i)+"\n";
+                    String temp=person_info.get(i).convertSaveType();
                     fos.write(temp.getBytes());
                 }
             }
@@ -183,29 +201,29 @@ public class ManageActivity extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void getPersonList(){
-        String data = null;
+        String name = null,pos=null,bNum=null;
         FileInputStream fis = null;
         try{
             fis = openFileInput(listRepository);
             BufferedReader iReader = new BufferedReader(new InputStreamReader(fis));
 
-            data = iReader.readLine();
-            while(data!=null){
-                person_info.add(data);
-                data=iReader.readLine();
+            name=iReader.readLine();
+            pos=iReader.readLine();
+            bNum=iReader.readLine();
+
+            while(name!=null && pos!=null && bNum!=null){
+                person_info.add(new Person(name,pos,bNum));
+                person=new Person(name,pos,bNum);
+                addOnePerson();
+                name=iReader.readLine();
+                pos=iReader.readLine();
+                bNum=iReader.readLine();
             }
             iReader.close();
         }catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }
-
-        for(int i=0;i<person_info.size();i+=3){
-            name=person_info.get(i);
-            position=person_info.get(i+1);
-            backNum=person_info.get(i+2);
-            addOnePerson();
         }
     }
 
