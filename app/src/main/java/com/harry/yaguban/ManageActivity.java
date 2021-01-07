@@ -9,6 +9,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
@@ -21,6 +22,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -46,6 +48,7 @@ public class ManageActivity extends AppCompatActivity {
     TableLayout person_list_layout;
     ArrayList<TableRow> person_list;
     ArrayList<Person> person_info;
+    ArrayList<CheckBox> delete_checks;
     final String listRepository="managePersonList";
     Person person;
 
@@ -56,6 +59,7 @@ public class ManageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_manage);
         person_list = new ArrayList<>();
         person_info = new ArrayList<>();
+        delete_checks = new ArrayList<>();
 
         initializeToolBar();
         getPersonList();
@@ -68,13 +72,22 @@ public class ManageActivity extends AppCompatActivity {
     public void buttonPersonRemoveClicked(View v){
         person_list_layout=findViewById(R.id.personListLayout);
 
-        int lastIndex = person_list.size()-1;
-        if(lastIndex<0)return;
-
-        person_list_layout.removeView(person_list.get(lastIndex));
-        person_list.remove(lastIndex);
-
-        person_info.remove(lastIndex);
+        for(int i=0;i<delete_checks.size();++i){
+            if(delete_checks.get(i).isChecked()){
+                person_list_layout.removeView(person_list.get(i));
+                person_list.remove(i);
+                person_info.remove(i);
+                delete_checks.remove(i);
+                --i;
+            }
+        }
+        for(int i=0;i<person_list.size();++i){
+            switch(i%2)
+            {
+                case 0: person_list.get(i).setBackgroundResource(R.drawable.person_table_row_design_odd); break;
+                case 1: person_list.get(i).setBackgroundResource(R.drawable.person_table_row_design); break;
+            }
+        }
     }
 
     @Override
@@ -131,8 +144,14 @@ public class ManageActivity extends AppCompatActivity {
             case 1: tableRow.setBackgroundResource(R.drawable.person_table_row_design_odd); break;
         }
 
+        CheckBox deleteCheck = new CheckBox(this);
+        delete_checks.add(deleteCheck);
+        deleteCheck.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#711F1F")));
+        tableRow.addView(deleteCheck);
+
         for (int i = 0; i < 3; ++i) {
             TextView textView = new TextView(this);
+            textView.setWidth(120); textView.setHeight(120);
             textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
             textView.setTextColor(Color.parseColor("#7A4F4F"));
             textView.setGravity(Gravity.LEFT);
@@ -224,13 +243,5 @@ public class ManageActivity extends AppCompatActivity {
             backPressedTime=tempTime;
             Toast.makeText(getApplicationContext(),"한번 더 누르면 저장 후 종료됩니다.",Toast.LENGTH_SHORT).show();
         }
-    }
-
-    public void testClicked(View v){
-        String temp = "";
-        for(int i=0;i<person_info.size();++i){
-            temp+=person_info.get(i).convertSaveType();
-        }
-        Toast.makeText(this,temp,Toast.LENGTH_SHORT).show();
     }
 }

@@ -47,7 +47,7 @@
             android:textSize="28sp" />
 
         <TextView
-            android:layout_width="120dp"
+            android:layout_width="115dp"
             android:layout_height="50dp"
             android:fontFamily="@font/bccardbold"
             android:gravity="center"
@@ -57,7 +57,7 @@
             android:textSize="28sp" />
 
         <TextView
-            android:layout_width="129dp"
+            android:layout_width="120dp"
             android:layout_height="50dp"
             android:fontFamily="@font/bccardbold"
             android:gravity="center"
@@ -86,7 +86,7 @@
             android:layout_marginTop="0dp"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="20dp"
-            android:stretchColumns="*"
+            android:stretchColumns="1,2,3"
             android:gravity="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -127,18 +127,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.72"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/testButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="testClicked"
-        android:text="V"
-        android:fontFamily="@font/bccardbold"
-        android:textStyle="bold"
-        android:textSize="25sp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
