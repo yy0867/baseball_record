@@ -128,4 +128,17 @@
         app:layout_constraintHorizontal_bias="0.72"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <Button
+        android:id="@+id/testButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="testClicked"
+        android:text="V"
+        android:fontFamily="@font/bccardbold"
+        android:textStyle="bold"
+        android:textSize="25sp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

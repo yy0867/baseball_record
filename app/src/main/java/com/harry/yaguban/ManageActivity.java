@@ -45,9 +45,9 @@ public class ManageActivity extends AppCompatActivity {
 
     TableLayout person_list_layout;
     ArrayList<TableRow> person_list;
-    ArrayList<String> person_info;
+    ArrayList<Person> person_info;
     final String listRepository="managePersonList";
-    String name, position, backNum;
+    Person person;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -74,9 +74,7 @@ public class ManageActivity extends AppCompatActivity {
         person_list_layout.removeView(person_list.get(lastIndex));
         person_list.remove(lastIndex);
 
-        for(int i=0;i<3;++i){
-            person_info.remove(person_info.size()-1);
-        }
+        person_info.remove(lastIndex);
     }
 
     @Override
@@ -111,10 +109,11 @@ public class ManageActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                name=pName.getText().toString();
-                position=pos.getSelectedItem().toString();
-                backNum=bNum.getText().toString();
-                person_info.add(name); person_info.add(position); person_info.add(backNum);
+                String name=pName.getText().toString();
+                String position=pos.getSelectedItem().toString();
+                String backNum=bNum.getText().toString();
+                person = new Person(name,position,backNum);
+                person_info.add(person);
                 addOnePerson();
             }
         }).setNegativeButton("취소",null).show();
@@ -142,9 +141,9 @@ public class ManageActivity extends AppCompatActivity {
             textView.setTypeface(face);
 
             switch (i) {
-                case 0: textView.setText(name); break;
-                case 1: textView.setText(position); break;
-                case 2: textView.setText(backNum); break;
+                case 0: textView.setText(person.getName()); break;
+                case 1: textView.setText(person.getPosition()); break;
+                case 2: textView.setText(person.getBackNum()); break;
             }
             tableRow.addView(textView);
         }
@@ -169,7 +168,7 @@ public class ManageActivity extends AppCompatActivity {
             else{
                 for(int i=0;i<person_info.size();++i)
                 {
-                    String temp=person_info.get(i)+"\n";
+                    String temp=person_info.get(i).convertSaveType();
                     fos.write(temp.getBytes());
                 }
             }
@@ -183,29 +182,29 @@ public class ManageActivity extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void getPersonList(){
-        String data = null;
+        String name = null,pos=null,bNum=null;
         FileInputStream fis = null;
         try{
             fis = openFileInput(listRepository);
             BufferedReader iReader = new BufferedReader(new InputStreamReader(fis));
 
-            data = iReader.readLine();
-            while(data!=null){
-                person_info.add(data);
-                data=iReader.readLine();
+            name=iReader.readLine();
+            pos=iReader.readLine();
+            bNum=iReader.readLine();
+
+            while(name!=null && pos!=null && bNum!=null){
+                person_info.add(new Person(name,pos,bNum));
+                person=new Person(name,pos,bNum);
+                addOnePerson();
+                name=iReader.readLine();
+                pos=iReader.readLine();
+                bNum=iReader.readLine();
             }
             iReader.close();
         }catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }
-
-        for(int i=0;i<person_info.size();i+=3){
-            name=person_info.get(i);
-            position=person_info.get(i+1);
-            backNum=person_info.get(i+2);
-            addOnePerson();
         }
     }
 
@@ -225,5 +224,13 @@ public class ManageActivity extends AppCompatActivity {
             backPressedTime=tempTime;
             Toast.makeText(getApplicationContext(),"한번 더 누르면 저장 후 종료됩니다.",Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void testClicked(View v){
+        String temp = "";
+        for(int i=0;i<person_info.size();++i){
+            temp+=person_info.get(i).convertSaveType();
+        }
+        Toast.makeText(this,temp,Toast.LENGTH_SHORT).show();
     }
 }
