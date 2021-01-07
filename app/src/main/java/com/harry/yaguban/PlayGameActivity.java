@@ -1,8 +1,10 @@
 package com.harry.yaguban;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,6 +16,7 @@ public class PlayGameActivity extends AppCompatActivity {
     boolean isDefense;
     TextView textBatPitch;
     SwitchCompat switchBatPitch;
+    TableRow rowInnings, rowHomeTeam, rowAwayTeam;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,10 @@ public class PlayGameActivity extends AppCompatActivity {
         opponentTeamName.setText(vsTeamName);
 
         //print Scoreboard
+        rowInnings = findViewById(R.id.tablerowInning);
+        rowHomeTeam = findViewById(R.id.tablerowHomeTeam);
+        rowAwayTeam = findViewById(R.id.tablerowAwayTeam);
+        setRowScoreBoard();
     }
 
     private void changeBatPitchText() {
@@ -45,6 +52,21 @@ public class PlayGameActivity extends AppCompatActivity {
             textBatPitch.setText("투수");
         } else {
             textBatPitch.setText("타자");
+        }
+    }
+
+    private void setRowScoreBoard() {
+        Typeface font = Typeface.createFromAsset(getAssets(), "font/bccardlight.ttf");
+        //set row Innings
+        rowInnings.setWeightSum(9);
+        for (int i = 0; i < Game.inning; i++) {
+            TextView tableText = new TextView(this);
+
+            tableText.setText(String.valueOf(i + 1));
+            tableText.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1));
+            tableText.setTypeface(font);
+            tableText.setTextSize(20);
+            rowInnings.addView(tableText);
         }
     }
 
