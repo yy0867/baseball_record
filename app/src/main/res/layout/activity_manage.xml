@@ -44,7 +44,7 @@
             android:padding="5dp"
             android:text="이름"
             android:textColor="@color/white"
-            android:textSize="28sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:layout_width="115dp"
@@ -54,7 +54,7 @@
             android:padding="5dp"
             android:text="포지션"
             android:textColor="@color/white"
-            android:textSize="28sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:layout_width="120dp"
@@ -64,13 +64,13 @@
             android:padding="5dp"
             android:text="등번호"
             android:textColor="@color/white"
-            android:textSize="28sp" />
+            android:textSize="20sp" />
     </LinearLayout>
 
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
-        android:layout_height="580dp"
+        android:layout_height="560dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -86,8 +86,8 @@
             android:layout_marginTop="0dp"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="20dp"
-            android:stretchColumns="1,2,3"
             android:gravity="center"
+            android:stretchColumns="1,2,3"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -102,30 +102,30 @@
         android:id="@+id/buttonPersonAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/bccardbold"
         android:onClick="buttonPersonAddClicked"
         android:text="+"
-        android:fontFamily="@font/bccardbold"
-        android:textStyle="bold"
-        android:textSize="25sp"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="25sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.28"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
 
     <Button
         android:id="@+id/buttonPersonRemove"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/bccardbold"
         android:onClick="buttonPersonRemoveClicked"
         android:text="-"
-        android:fontFamily="@font/bccardbold"
-        android:textStyle="bold"
-        android:textSize="25sp"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="25sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.72"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

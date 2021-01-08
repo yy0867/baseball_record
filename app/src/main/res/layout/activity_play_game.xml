@@ -65,7 +65,7 @@
 
         <TableLayout
             android:layout_width="match_parent"
-            android:layout_height="470dp"
+            android:layout_height="420dp"
             android:background="@color/table_color">
 
 
@@ -187,16 +187,25 @@
                 </LinearLayout>
         </TableLayout>
 
+        <ImageView
+            android:id="@+id/imageviewOuts"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="end"
+            android:src="@drawable/out_0"
+            android:contentDescription="@string/out" />
+
         <TableLayout
             android:id="@+id/tablelayoutScoreboard"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="15dp">
+            android:layout_marginTop="15dp"
+            android:stretchColumns="0">
 
             <TableRow
                 android:id="@+id/tablerowInning"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent" />
 
             <TableRow
                 android:id="@+id/tablerowAwayTeam"
