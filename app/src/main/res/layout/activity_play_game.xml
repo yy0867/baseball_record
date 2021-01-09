@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="20dp"
     tools:context=".PlayGameActivity">
@@ -40,14 +40,15 @@
                 android:id="@+id/textviewBatPitch"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_marginTop="15dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginBottom="2dp"
                 android:fontFamily="@font/bccardbold"
                 android:gravity="center"
                 android:text="@string/batter"
                 android:textSize="15sp"
-                app:layout_constraintEnd_toStartOf="@+id/switchBatPitch" />
+                app:layout_constraintEnd_toStartOf="@+id/switchBatPitch"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/switchBatPitch"
@@ -64,7 +65,7 @@
 
         <TableLayout
             android:layout_width="match_parent"
-            android:layout_height="470dp"
+            android:layout_height="420dp"
             android:background="@color/table_color">
 
 
@@ -72,7 +73,8 @@
 
         <TableLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:stretchColumns="*">
                 <!-- Set Layout Width -->
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -185,12 +187,37 @@
                 </LinearLayout>
         </TableLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <ImageView
+            android:id="@+id/imageviewOuts"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="end"
+            android:src="@drawable/out_0"
+            android:contentDescription="@string/out" />
+
+        <TableLayout
+            android:id="@+id/tablelayoutScoreboard"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginTop="15dp"
+            android:stretchColumns="0">
 
+            <TableRow
+                android:id="@+id/tablerowInning"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            <TableRow
+                android:id="@+id/tablerowAwayTeam"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <TableRow
+                android:id="@+id/tablerowHomeTeam"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+            
+        </TableLayout>
 
     </LinearLayout>
 

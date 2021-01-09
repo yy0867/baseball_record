@@ -6,8 +6,10 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
@@ -16,11 +18,13 @@ import java.util.Date;
 public class AddInformationInputActivity extends AppCompatActivity {
 
     Date gameDate;
+    TextView dateSelectText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_information_input);
+        dateSelectText = findViewById(R.id.textviewDateSelected);
     }
 
     public void SelectDateClicked(View v) {
@@ -40,19 +44,28 @@ public class AddInformationInputActivity extends AppCompatActivity {
                 gameDate.setYear(data.getIntExtra("year", 0) - 1900);
                 gameDate.setMonth(data.getIntExtra("month", 0));
                 gameDate.setDate(data.getIntExtra("day", 0));
+
+                dateSelectText.setText(getDateString(gameDate));
             }
         }
     }
 
-    public void GameStartClicked(View v) {
-        if(gameDate == null) {
-            Toast.makeText(this, "날짜를 선택해주세요!", Toast.LENGTH_LONG).show();
-            return;
-        }
+    private String getDateString(Date date) {
+        return (date.getYear() + 1900) + "/" + (date.getMonth() + 1) + "/" + date.getDate();
+    }
 
+    public void GameStartClicked(View v) {
         CheckBox isHometeam = findViewById(R.id.checkboxIsHometeam);
         EditText edittextOpponent = findViewById(R.id.edittextOpponent);
         String homeTeam, awayTeam;
+
+        if (edittextOpponent.getText().toString().equals("")) {
+            Toast.makeText(this, "상대팀 이름을 입력해주세요!", Toast.LENGTH_LONG).show();
+            return;
+        } else if(gameDate == null) {
+            Toast.makeText(this, "날짜를 선택해주세요!", Toast.LENGTH_LONG).show();
+            return;
+        }
 
         if (isHometeam.isChecked()) {
             homeTeam = "광운대학교";

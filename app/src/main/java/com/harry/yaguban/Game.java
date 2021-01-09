@@ -28,8 +28,9 @@ public class Game implements Serializable {
 
     public int getInning() { return curInning; }
     public int getCurOut() { return curOut; }
-    public String getCurAttackTeam() { return curAttackTeam == home ? homeTeam : awayTeam; }
-    public String getCurDefenseTeam() { return curAttackTeam == home ? awayTeam : homeTeam; }
+    public boolean getCurAttackTeam() { return curAttackTeam; }
+    public boolean getCurDefenseTeam() { return !curAttackTeam; }
+    public int getTeamScore(boolean whichTeam, int index) { return whichTeam == home ? scoreHome[index] : scoreAway[index]; }
     public String getHomeTeam() { return homeTeam; }
     public String getAwayTeam() { return awayTeam; }
     public String getOpponentTeam() { return homeTeam.equals(ourTeam) ? awayTeam : homeTeam; }
