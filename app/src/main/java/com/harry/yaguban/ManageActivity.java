@@ -124,19 +124,29 @@ public class ManageActivity extends AppCompatActivity{
         final EditText bNum=(EditText)loginLayout.findViewById(R.id.backNumber);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("선수정보 입력").setView(loginLayout).setPositiveButton("완료", new DialogInterface.OnClickListener() {
+        builder.setTitle("선수정보 입력").setView(loginLayout).setPositiveButton("완료", null)
+                .setNegativeButton("취소",null);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener(){
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(View v) {
                 String name=pName.getText().toString();
                 String position=pos.getSelectedItem().toString();
                 String backNum=bNum.getText().toString();
-                person = new Person(name,position,backNum);
-                person_info.add(person);
-                addOnePerson();
-                savePersonList();
+                if(!name.equals("") && !backNum.equals("")) {
+                    person = new Person(name, position, backNum);
+                    person_info.add(person);
+                    addOnePerson();
+                    savePersonList();
+                    dialog.dismiss();
+                }
+                else{
+                    Toast.makeText(getApplicationContext(),"모든 정보를 입력해주세요.",Toast.LENGTH_SHORT).show();
+                }
             }
-        }).setNegativeButton("취소",null).show();
+        });
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
