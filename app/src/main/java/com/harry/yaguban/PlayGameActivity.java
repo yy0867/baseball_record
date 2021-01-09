@@ -3,6 +3,7 @@ package com.harry.yaguban;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TableLayout;
@@ -78,10 +79,10 @@ public class PlayGameActivity extends AppCompatActivity {
     //set row Innings
     private void setRowInnings() {
         rowInnings.setWeightSum(9);
-        rowInnings.addView(setTableText("이닝", 1.8f, true));
+        rowInnings.addView(setTableText("이닝", 1.8f, true, false));
 
         for (int i = 0; i < Game.inning; i++) {
-            rowInnings.addView(setTableText(Integer.toString(i + 1), 0.8f, true));
+            rowInnings.addView(setTableText(Integer.toString(i + 1), 0.8f, true, false));
         }
     }
 
@@ -99,20 +100,24 @@ public class PlayGameActivity extends AppCompatActivity {
         else teamName = newGame.getAwayTeam().replaceAll("대학교", "");;
 
         rowWhichTeam.setBackgroundColor(getResources().getColor(R.color.background_color));
-        rowWhichTeam.addView(setTableText(teamName, 1.8f, false));
+        rowWhichTeam.addView(setTableText(teamName, 1.8f, false, false));
 
         for (int i = 0; i < Game.inning; i++) {
-            rowWhichTeam.addView(setTableText(Integer.toString(newGame.getTeamScore(isHomeTeam, i)), 0.8f, false));
+            rowWhichTeam.addView(setTableText(Integer.toString(newGame.getTeamScore(isHomeTeam, i)),
+                    0.8f, false, i == newGame.getInning()));
         }
     }
 
-    private TextView setTableText(String value, float weight, boolean bold) {
+    private TextView setTableText(String value, float weight, boolean bold, boolean highlight) {
         TextView text = new TextView(this);
         text.setText(value);
+        text.setGravity(Gravity.CENTER);
         text.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, weight));
 
         if (bold) text.setTypeface(boldfont);
         else text.setTypeface(font);
+
+        if(highlight) text.setBackgroundColor(getResources().getColor(R.color.table_highlight_color));
 
         text.setTextSize(20);
 
@@ -173,6 +178,7 @@ public class PlayGameActivity extends AppCompatActivity {
             outCounts.setImageResource(R.drawable.out_2);
         else if(newGame.getCurOut() == 3)
             outCounts.setImageResource(R.drawable.out_3);
+        reloadScoreBoard();
 
         Toast.makeText(this, "아웃!", Toast.LENGTH_SHORT).show();
     }
