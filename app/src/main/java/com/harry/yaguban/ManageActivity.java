@@ -1,19 +1,24 @@
 package com.harry.yaguban;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.app.Service;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.IBinder;
+import android.os.Looper;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -40,7 +45,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-public class ManageActivity extends AppCompatActivity {
+public class ManageActivity extends AppCompatActivity{
 
     private final long FINISH_INTERVAL_TIME=2000;
     private long backPressedTime=0;
@@ -57,6 +62,7 @@ public class ManageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage);
+
         person_list = new ArrayList<>();
         person_info = new ArrayList<>();
         delete_checks = new ArrayList<>();
@@ -78,6 +84,7 @@ public class ManageActivity extends AppCompatActivity {
                 person_list.remove(i);
                 person_info.remove(i);
                 delete_checks.remove(i);
+                savePersonList();
                 --i;
             }
         }
@@ -102,7 +109,6 @@ public class ManageActivity extends AppCompatActivity {
         switch(item.getItemId()){
             case R.id.optionHelp: break;
             case android.R.id.home:
-                savePersonList();
                 finish();
             break;
         }
@@ -128,6 +134,7 @@ public class ManageActivity extends AppCompatActivity {
                 person = new Person(name,position,backNum);
                 person_info.add(person);
                 addOnePerson();
+                savePersonList();
             }
         }).setNegativeButton("취소",null).show();
     }
@@ -166,7 +173,6 @@ public class ManageActivity extends AppCompatActivity {
             }
             tableRow.addView(textView);
         }
-
         person_list_layout.addView(tableRow);
     }
 
@@ -179,7 +185,7 @@ public class ManageActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
     }
 
-    private void savePersonList(){
+    public void savePersonList(){
         FileOutputStream fos=null;
         try{
             fos=openFileOutput(listRepository,Context.MODE_PRIVATE);
@@ -200,7 +206,7 @@ public class ManageActivity extends AppCompatActivity {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private void getPersonList(){
+    public void getPersonList(){
         String name = null,pos=null,bNum=null;
         FileInputStream fis = null;
         try{
@@ -235,7 +241,6 @@ public class ManageActivity extends AppCompatActivity {
 
         if(0<=intervalTime && FINISH_INTERVAL_TIME>=intervalTime)
         {
-            savePersonList();
             finish();
         }
         else

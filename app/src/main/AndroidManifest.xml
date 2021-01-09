@@ -28,6 +28,8 @@
         <activity
             android:name=".LoadingActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <service android:name=".UnCatchedExit"
+            android:stopWithTask="false"/>
     </application>
 
 </manifest>
