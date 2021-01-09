@@ -63,129 +63,262 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="420dp"
-            android:background="@color/table_color">
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
+            <LinearLayout
+                android:id="@+id/layoutBatter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="visible">
+            <!-- Person info layout -->
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="420dp"
+                    android:background="@color/table_color">
 
-        </TableLayout>
+                </TableLayout>
 
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:stretchColumns="*">
-                <!-- Set Layout Width -->
-                <LinearLayout
-                    android:layout_width="wrap_content"
+                <!-- Batter Button layout -->
+                <TableLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:stretchColumns="*">
+                    <!-- Set Layout Width -->
+                    <TableRow
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
 
-                <Button
-                    style="?android:attr/button"
-                    android:id="@+id/buttonHit1"
-                    android:layout_width="0dp"
+                        <Button
+                            style="?android:attr/button"
+                            android:id="@+id/buttonHit1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="4"
+                            android:fontFamily="@font/bccardbold"
+                            android:onClick="hit1Clicked"
+                            android:text="@string/hit_1" />
+
+                        <Button
+                            style="?android:attr/button"
+                            android:id="@+id/buttonHit2"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="4"
+                            android:fontFamily="@font/bccardbold"
+                            android:onClick="hit2Clicked"
+                            android:text="@string/hit_2" />
+
+                        <Button
+                            style="?android:attr/button"
+                            android:id="@+id/buttonHit3"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="4"
+                            android:fontFamily="@font/bccardbold"
+                            android:onClick="hit3Clicked"
+                            android:text="@string/hit_3" />
+
+                        <Button
+                            style="?android:attr/button"
+                            android:id="@+id/buttonHomerun"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="4"
+                            android:fontFamily="@font/bccardbold"
+                            android:onClick="homerunClicked"
+                            android:text="@string/homerun" />
+
+                    </TableRow>
+                    <!-- Set Layout Width -->
+                    <TableRow
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <Button
+                            style="?android:attr/button"
+                            android:id="@+id/buttonBall4"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="4"
+                            android:fontFamily="@font/bccardbold"
+                            android:onClick="ball4Clicked"
+                            android:text="@string/ball_4" />
+
+                        <Button
+                            style="?android:attr/button"
+                            android:id="@+id/buttonStrikeout"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="4"
+                            android:fontFamily="@font/bccardbold"
+                            android:onClick="strikeoutClicked"
+                            android:text="@string/strikeout" />
+
+                        <Button
+                            style="?android:attr/button"
+                            android:id="@+id/buttonRBI"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="4"
+                            android:fontFamily="@font/bccardbold"
+                            android:onClick="RBIClicked"
+                            android:text="@string/rbi" />
+
+                        <Button
+                            style="?android:attr/button"
+                            android:id="@+id/buttonOut"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="4"
+                            android:fontFamily="@font/bccardbold"
+                            android:onClick="outClicked"
+                            android:text="@string/out" />
+
+                    </TableRow>
+                </TableLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layoutPitcher"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="invisible">
+                <!-- Person info layout -->
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="420dp"
+                    android:background="@color/background_color">
+
+                </TableLayout>
+
+                <!-- Batter Pitcher layout -->
+                <TableLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_weight="4"
-                    android:fontFamily="@font/bccardbold"
-                    android:onClick="hit1Clicked"
-                    android:text="@string/hit_1" />
+                    android:stretchColumns="*">
+                    <!-- Set Layout Width -->
+                    <TableRow
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
 
-                <Button
-                    style="?android:attr/button"
-                    android:id="@+id/buttonHit2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_weight="4"
-                    android:fontFamily="@font/bccardbold"
-                    android:onClick="hit2Clicked"
-                    android:text="@string/hit_2" />
+                        <Button
+                            style="?android:attr/button"
+                            android:id="@+id/buttonStrikeoutPitcher"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="4"
+                            android:fontFamily="@font/bccardbold"
+                            android:onClick="strikeoutPitcherClicked"
+                            android:text="@string/strikeout" />
 
-                <Button
-                    style="?android:attr/button"
-                    android:id="@+id/buttonHit3"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_weight="4"
-                    android:fontFamily="@font/bccardbold"
-                    android:onClick="hit3Clicked"
-                    android:text="@string/hit_3" />
+                        <Button
+                            style="?android:attr/button"
+                            android:id="@+id/buttonBall4Pitcher"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="4"
+                            android:fontFamily="@font/bccardbold"
+                            android:onClick="ball4PitcherClicked"
+                            android:text="@string/ball_4" />
 
-                <Button
-                    style="?android:attr/button"
-                    android:id="@+id/buttonHomerun"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_weight="4"
-                    android:fontFamily="@font/bccardbold"
-                    android:onClick="homerunClicked"
-                    android:text="@string/homerun" />
+                        <Button
+                            style="?android:attr/button"
+                            android:id="@+id/buttonHitted"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="4"
+                            android:fontFamily="@font/bccardbold"
+                            android:onClick="hittedClicked"
+                            android:text="@string/hitted" />
 
-                </LinearLayout>
-                <!-- Set Layout Width -->
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                        <Button
+                            android:id="@+id/buttonDefError"
+                            style="?android:attr/button"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="4"
+                            android:fontFamily="@font/bccardbold"
+                            android:onClick="defErrorClicked"
+                            android:paddingLeft="8sp"
+                            android:paddingRight="8sp"
+                            android:text="@string/error"
+                            android:textSize="14sp" />
 
-                    <Button
-                        style="?android:attr/button"
-                        android:id="@+id/buttonBall4"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
-                        android:layout_weight="4"
-                        android:fontFamily="@font/bccardbold"
-                        android:onClick="ball4Clicked"
-                        android:text="@string/ball_4" />
+                    </TableRow>
+                    <!-- Set Layout Width -->
+                    <TableRow
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
 
-                    <Button
-                        style="?android:attr/button"
-                        android:id="@+id/buttonStrikeout"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
-                        android:layout_weight="4"
-                        android:fontFamily="@font/bccardbold"
-                        android:onClick="strikeoutClicked"
-                        android:text="@string/strikeout" />
+                        <Button
+                            style="?android:attr/button"
+                            android:id="@+id/buttonOutPitcher"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="4"
+                            android:fontFamily="@font/bccardbold"
+                            android:onClick="outPitcherClicked"
+                            android:text="@string/out" />
 
-                    <Button
-                        style="?android:attr/button"
-                        android:id="@+id/buttonRBI"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
-                        android:layout_weight="4"
-                        android:fontFamily="@font/bccardbold"
-                        android:onClick="RBIClicked"
-                        android:text="@string/rbi" />
+                        <Button
+                            style="?android:attr/button"
+                            android:id="@+id/buttonLosePoint"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="4"
+                            android:fontFamily="@font/bccardbold"
+                            android:onClick="losePointClicked"
+                            android:text="@string/lose_point" />
 
-                    <Button
-                        style="?android:attr/button"
-                        android:id="@+id/buttonOut"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
-                        android:layout_weight="4"
-                        android:fontFamily="@font/bccardbold"
-                        android:onClick="outClicked"
-                        android:text="@string/out" />
+                        <Button
+                            style="?android:attr/button"
+                            android:id="@+id/buttonNumPitches"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="4"
+                            android:fontFamily="@font/bccardbold"
+                            android:onClick="numPitchesClicked"
+                            android:text="@string/num_pitches" />
 
-                </LinearLayout>
-        </TableLayout>
+                    </TableRow>
+                </TableLayout>
+            </LinearLayout>
+
+        </FrameLayout>
 
         <ImageView
             android:id="@+id/imageviewOuts"

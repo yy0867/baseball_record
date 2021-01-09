@@ -22,6 +22,10 @@
     <string name="strikeout">삼진</string>
     <string name="rbi">타점</string>
     <string name="out">아웃</string>
+    <string name="hitted">피안타</string>
+    <string name="error">수비 실책</string>
+    <string name="lose_point">실점</string>
+    <string name="num_pitches">투구 수</string>
     <string name="batter">타자</string>
     <string name="pitcher">투수</string>
 

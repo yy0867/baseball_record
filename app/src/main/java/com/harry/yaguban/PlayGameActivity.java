@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -22,6 +23,7 @@ public class PlayGameActivity extends AppCompatActivity {
     SwitchCompat switchBatPitch;
     Typeface font, boldfont;
     TableRow rowInnings, rowHomeTeam, rowAwayTeam;
+    LinearLayout batterLayout, pitcherLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,8 @@ public class PlayGameActivity extends AppCompatActivity {
         switchBatPitch = findViewById(R.id.switchBatPitch);
         textBatPitch = findViewById(R.id.textviewBatPitch);
         outCounts = findViewById(R.id.imageviewOuts);
+        batterLayout = findViewById(R.id.layoutBatter);
+        pitcherLayout = findViewById(R.id.layoutPitcher);
 
         newGame = (Game)intent.getSerializableExtra("objectGame");
         font = Typeface.createFromAsset(getAssets(), "font/bccardlight.ttf");
@@ -42,7 +46,7 @@ public class PlayGameActivity extends AppCompatActivity {
         //first defense -> first pitcher
         isDefense = newGame.getHomeTeam().equals(Game.ourTeam);
         switchBatPitch.setChecked(isDefense);
-        changeBatPitchText();
+        changeBatPitchView();
 
         //print Opponent Team Name
         String vsTeamName = "vs " + newGame.getOpponentTeam();
@@ -55,11 +59,15 @@ public class PlayGameActivity extends AppCompatActivity {
         setScoreBoards();
     }
 
-    private void changeBatPitchText() {
+    private void changeBatPitchView() {
         if (isDefense) {
             textBatPitch.setText("투수");
+            batterLayout.setVisibility(View.INVISIBLE);
+            pitcherLayout.setVisibility(View.VISIBLE);
         } else {
             textBatPitch.setText("타자");
+            batterLayout.setVisibility(View.VISIBLE);
+            pitcherLayout.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -188,6 +196,6 @@ public class PlayGameActivity extends AppCompatActivity {
         isDefense = !isDefense;
         switchBatPitch.setChecked(isDefense);
         newGame.changeCurAttackTeam();
-        changeBatPitchText();
+        changeBatPitchView();
     }
 }
