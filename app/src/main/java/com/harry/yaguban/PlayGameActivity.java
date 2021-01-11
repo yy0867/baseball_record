@@ -291,12 +291,20 @@ public class PlayGameActivity extends AppCompatActivity {
     public void addPlayerClicked(View v) {
         //show popup
         Intent popupIntent = new Intent(this, AddPlayerPopupActivity.class);
+        popupIntent.putExtra("batterList", batterInfo);
+        popupIntent.putExtra("pitcherList", pitcherInfo);
         startActivityForResult(popupIntent, 1);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 1) {
+            if (requestCode == RESULT_OK) {
+
+            }
+        }
     }
 
     /*
