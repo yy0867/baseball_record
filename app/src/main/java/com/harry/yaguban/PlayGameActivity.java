@@ -12,6 +12,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
 
@@ -22,6 +23,7 @@ import java.io.IOError;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class PlayGameActivity extends AppCompatActivity {
     Game newGame;
@@ -187,10 +189,6 @@ public class PlayGameActivity extends AppCompatActivity {
     }
 
     // -------------------------- For Batters ---------------------------------
-    //타자 추가
-    public void addBatterClicked(View v) {
-
-    }
 
     //안타
     public void hit1Clicked(View v) {
@@ -251,12 +249,7 @@ public class PlayGameActivity extends AppCompatActivity {
         Toast.makeText(this, "아웃!", Toast.LENGTH_SHORT).show();
     }
     // --------------------------------- for Batters ------------------------------------
-
     // --------------------------------- for Pitchers ------------------------------------
-    //투수 추가
-    public void addPitcherClicked(View v) {
-
-    }
 
     //삼진
     public void strikeoutPitcherClicked(View v) {
@@ -293,6 +286,43 @@ public class PlayGameActivity extends AppCompatActivity {
 
     }
     // --------------------------------- for Pitchers ------------------------------------
+
+    //선수 추가
+    public void addPlayerClicked(View v) {
+        //show popup
+        Intent popupIntent = new Intent(this, AddPlayerPopupActivity.class);
+        startActivityForResult(popupIntent, 1);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    /*
+    public void SelectDateClicked(View v) {
+        //show popup
+        Intent popupIntent = new Intent(this, DateSelectPopupActivity.class);
+        popupIntent.putExtra("title", "날짜 선택");
+        startActivityForResult(popupIntent, 1);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 1) {
+            if (resultCode == RESULT_OK) {
+                gameDate = new Date();
+                gameDate.setYear(data.getIntExtra("year", 0) - 1900);
+                gameDate.setMonth(data.getIntExtra("month", 0));
+                gameDate.setDate(data.getIntExtra("day", 0));
+
+                dateSelectText.setText(getDateString(gameDate));
+            }
+        }
+    }
+*/
 
     //투타 변경
     public void batPitchSwitchClicked(View v) {

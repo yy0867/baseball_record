@@ -35,4 +35,8 @@
 
     <!-- App repository -->
     <string name="person_repository_name">선수 목록</string>
+
+    <!-- PopUp Title -->
+    <string name="date_popup_title">날짜 선택</string>
+    <string name="addplayer_popup_title">선수 추가</string>
 </resources>

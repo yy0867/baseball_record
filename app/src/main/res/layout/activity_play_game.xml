@@ -84,7 +84,7 @@
 
                 <Button
                     android:id="@+id/buttonAddBatter"
-                    android:onClick="addBatterClicked"
+                    android:onClick="addPlayerClicked"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_gravity="start"
@@ -228,7 +228,7 @@
 
                 <Button
                     android:id="@+id/buttonAddPitcher"
-                    android:onClick="addPitcherClicked"
+                    android:onClick="addPlayerClicked"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_gravity="start"
