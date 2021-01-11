@@ -54,7 +54,7 @@ public class ManageActivity extends AppCompatActivity{
     ArrayList<TableRow> person_list;
     ArrayList<Person> person_info;
     ArrayList<CheckBox> delete_checks;
-    final String listRepository="managePersonList";
+    static final String listRepository="managePersonList";
     Person person;
 
     @RequiresApi(api = Build.VERSION_CODES.O)

@@ -64,12 +64,12 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <FrameLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <LinearLayout
                 android:id="@+id/layoutBatter"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:visibility="visible">
@@ -81,6 +81,19 @@
                     android:background="@color/table_color">
 
                 </TableLayout>
+
+                <Button
+                    android:id="@+id/buttonAddBatter"
+                    android:onClick="addBatterClicked"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="start"
+                    android:paddingRight="10sp"
+                    android:paddingLeft="10sp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:fontFamily="@font/bccardbold"
+                    android:text="+"/>
 
                 <!-- Batter Button layout -->
                 <TableLayout
@@ -200,7 +213,7 @@
 
             <LinearLayout
                 android:id="@+id/layoutPitcher"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:visibility="invisible">
@@ -208,10 +221,23 @@
                 <TableLayout
                     android:id="@+id/tablelayoutPitcher"
                     android:layout_width="match_parent"
-                    android:layout_height="420dp"
+                    android:layout_height="400dp"
                     android:background="@color/background_color">
 
                 </TableLayout>
+
+                <Button
+                    android:id="@+id/buttonAddPitcher"
+                    android:onClick="addPitcherClicked"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="start"
+                    android:paddingRight="10sp"
+                    android:paddingLeft="10sp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:fontFamily="@font/bccardbold"
+                    android:text="+"/>
 
                 <!-- Batter Pitcher layout -->
                 <TableLayout
@@ -269,8 +295,8 @@
                             android:layout_weight="4"
                             android:fontFamily="@font/bccardbold"
                             android:onClick="defErrorClicked"
-                            android:paddingLeft="8sp"
-                            android:paddingRight="8sp"
+                            android:paddingLeft="5sp"
+                            android:paddingRight="5sp"
                             android:text="@string/error"
                             android:textSize="14sp" />
 

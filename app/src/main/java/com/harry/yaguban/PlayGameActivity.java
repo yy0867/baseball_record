@@ -15,6 +15,12 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOError;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class PlayGameActivity extends AppCompatActivity {
@@ -26,10 +32,12 @@ public class PlayGameActivity extends AppCompatActivity {
     Typeface font, boldfont;
     TableRow rowInnings, rowHomeTeam, rowAwayTeam;
     LinearLayout batterLayout, pitcherLayout;
-    TableLayout batterList, pitcherList;
+    TableLayout batterListLayout, pitcherListLayout;
 
     ArrayList<Person> batterInfo;
     ArrayList<Person> pitcherInfo;
+
+    static final String gameRepository = "manageGameList";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +45,8 @@ public class PlayGameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_play_game);
 
         Intent intent = getIntent();
+        batterInfo = new ArrayList<>();
+        pitcherInfo = new ArrayList<>();
 
         TextView opponentTeamName = findViewById(R.id.textviewVS);
         switchBatPitch = findViewById(R.id.switchBatPitch);
@@ -44,8 +54,8 @@ public class PlayGameActivity extends AppCompatActivity {
         outCounts = findViewById(R.id.imageviewOuts);
         batterLayout = findViewById(R.id.layoutBatter);
         pitcherLayout = findViewById(R.id.layoutPitcher);
-        batterList = findViewById(R.id.tablelayoutBatter);
-        pitcherList = findViewById(R.id.tablelayoutPitcher);
+        batterListLayout = findViewById(R.id.tablelayoutBatter);
+        pitcherListLayout = findViewById(R.id.tablelayoutPitcher);
 
         newGame = (Game)intent.getSerializableExtra("objectGame");
         font = Typeface.createFromAsset(getAssets(), "font/bccardlight.ttf");
@@ -61,8 +71,7 @@ public class PlayGameActivity extends AppCompatActivity {
         opponentTeamName.setText(vsTeamName);
 
         //set batter & pitcher list
-        setBatterList();
-        setPitcherList();
+        getPersonInfo();
 
         //print Scoreboard
         rowInnings = findViewById(R.id.tablerowInning);
@@ -83,12 +92,37 @@ public class PlayGameActivity extends AppCompatActivity {
         }
     }
 
-    private void setBatterList() {
+    //Load Person information from file
+    private void getPersonInfo() {
+        String name, position, backNumber;
+        FileInputStream inputStream;
 
-    }
+        try {
+            inputStream = openFileInput(ManageActivity.listRepository);
+            BufferedReader inputReader = new BufferedReader(new InputStreamReader(inputStream));
 
-    private void setPitcherList() {
+            name = inputReader.readLine();
+            position = inputReader.readLine();
+            backNumber = inputReader.readLine();
 
+            while(name != null && position != null && backNumber != null) {
+                if (position.equals("투수"))
+                    pitcherInfo.add(new Person(name, position, backNumber));
+                else
+                    batterInfo.add(new Person(name, position, backNumber));
+
+                name = inputReader.readLine();
+                position = inputReader.readLine();
+                backNumber = inputReader.readLine();
+            }
+            inputReader.close();
+        } catch (FileNotFoundException e) {
+            Toast.makeText(this, "File not Found!", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        } catch (IOException e) {
+            Toast.makeText(this, "Read Error!", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
     }
 
     private void setScoreBoards() {
@@ -153,6 +187,11 @@ public class PlayGameActivity extends AppCompatActivity {
     }
 
     // -------------------------- For Batters ---------------------------------
+    //타자 추가
+    public void addBatterClicked(View v) {
+
+    }
+
     //안타
     public void hit1Clicked(View v) {
         Toast.makeText(this, "안타!", Toast.LENGTH_SHORT).show();
@@ -214,6 +253,11 @@ public class PlayGameActivity extends AppCompatActivity {
     // --------------------------------- for Batters ------------------------------------
 
     // --------------------------------- for Pitchers ------------------------------------
+    //투수 추가
+    public void addPitcherClicked(View v) {
+
+    }
+
     //삼진
     public void strikeoutPitcherClicked(View v) {
 
