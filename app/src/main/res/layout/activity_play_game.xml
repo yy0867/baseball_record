@@ -75,6 +75,7 @@
                 android:visibility="visible">
             <!-- Person info layout -->
                 <TableLayout
+                    android:id="@+id/tablelayoutBatter"
                     android:layout_width="match_parent"
                     android:layout_height="420dp"
                     android:background="@color/table_color">
@@ -205,6 +206,7 @@
                 android:visibility="invisible">
                 <!-- Person info layout -->
                 <TableLayout
+                    android:id="@+id/tablelayoutPitcher"
                     android:layout_width="match_parent"
                     android:layout_height="420dp"
                     android:background="@color/background_color">

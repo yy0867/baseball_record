@@ -15,6 +15,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
 
+import java.util.ArrayList;
+
 public class PlayGameActivity extends AppCompatActivity {
     Game newGame;
     boolean isDefense;
@@ -24,6 +26,10 @@ public class PlayGameActivity extends AppCompatActivity {
     Typeface font, boldfont;
     TableRow rowInnings, rowHomeTeam, rowAwayTeam;
     LinearLayout batterLayout, pitcherLayout;
+    TableLayout batterList, pitcherList;
+
+    ArrayList<Person> batterInfo;
+    ArrayList<Person> pitcherInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +44,8 @@ public class PlayGameActivity extends AppCompatActivity {
         outCounts = findViewById(R.id.imageviewOuts);
         batterLayout = findViewById(R.id.layoutBatter);
         pitcherLayout = findViewById(R.id.layoutPitcher);
+        batterList = findViewById(R.id.tablelayoutBatter);
+        pitcherList = findViewById(R.id.tablelayoutPitcher);
 
         newGame = (Game)intent.getSerializableExtra("objectGame");
         font = Typeface.createFromAsset(getAssets(), "font/bccardlight.ttf");
@@ -51,6 +59,10 @@ public class PlayGameActivity extends AppCompatActivity {
         //print Opponent Team Name
         String vsTeamName = "vs " + newGame.getOpponentTeam();
         opponentTeamName.setText(vsTeamName);
+
+        //set batter & pitcher list
+        setBatterList();
+        setPitcherList();
 
         //print Scoreboard
         rowInnings = findViewById(R.id.tablerowInning);
@@ -69,6 +81,14 @@ public class PlayGameActivity extends AppCompatActivity {
             batterLayout.setVisibility(View.VISIBLE);
             pitcherLayout.setVisibility(View.INVISIBLE);
         }
+    }
+
+    private void setBatterList() {
+
+    }
+
+    private void setPitcherList() {
+
     }
 
     private void setScoreBoards() {
@@ -132,6 +152,7 @@ public class PlayGameActivity extends AppCompatActivity {
         return text;
     }
 
+    // -------------------------- For Batters ---------------------------------
     //안타
     public void hit1Clicked(View v) {
         Toast.makeText(this, "안타!", Toast.LENGTH_SHORT).show();
@@ -190,6 +211,44 @@ public class PlayGameActivity extends AppCompatActivity {
 
         Toast.makeText(this, "아웃!", Toast.LENGTH_SHORT).show();
     }
+    // --------------------------------- for Batters ------------------------------------
+
+    // --------------------------------- for Pitchers ------------------------------------
+    //삼진
+    public void strikeoutPitcherClicked(View v) {
+
+    }
+
+    //볼넷
+    public void ball4PitcherClicked(View v) {
+
+    }
+
+    //피안타
+    public void hittedClicked(View v) {
+
+    }
+
+    //수비 실책
+    public void defErrorClicked(View v) {
+
+    }
+
+    //아웃
+    public void outPitcherClicked(View v) {
+
+    }
+
+    //실점
+    public void losePointClicked(View v) {
+
+    }
+
+    //투구 수
+    public void numPitchesClicked(View v) {
+
+    }
+    // --------------------------------- for Pitchers ------------------------------------
 
     //투타 변경
     public void batPitchSwitchClicked(View v) {
