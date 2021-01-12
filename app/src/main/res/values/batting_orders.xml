@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="batting_order">
+        <item>1번 타자</item>
+        <item>2번 타자</item>
+        <item>3번 타자</item>
+        <item>4번 타자</item>
+        <item>5번 타자</item>
+        <item>6번 타자</item>
+        <item>7번 타자</item>
+        <item>8번 타자</item>
+        <item>9번 타자</item>
+        <item>대타</item>
+    </string-array>
+</resources>

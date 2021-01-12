@@ -27,16 +27,109 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/bccardlight"
-            android:text="@string/batter"/>
+            android:text="@string/batter" />
 
         <RadioButton
             android:id="@+id/radiobuttonPitcher"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/pitcher"
-            android:fontFamily="@font/bccardlight"
             android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp" />
+            android:layout_marginLeft="20dp"
+            android:fontFamily="@font/bccardlight"
+            android:text="@string/pitcher" />
+
 
     </RadioGroup>
+
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/radiogroupSelectBatPitch">
+
+        <!-- Batter Select -->
+        <LinearLayout
+            android:id="@+id/layoutBatterList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="invisible">
+
+            <Spinner
+                android:id="@+id/spinnerSelectBatter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="0dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginRight="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toBottomOf="@+id/radiogroupSelectBatPitch" />
+
+            <Spinner
+                android:id="@+id/spinnerSelectBattingOrder"
+                android:layout_marginTop="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/batting_order"/>
+
+            <Button
+                android:id="@+id/buttonAddBatterPopup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginTop="150dp"
+                android:fontFamily="@font/bccardlight"
+                android:background="@color/main_color"
+                android:text="@string/addplayer_popup_title" />
+
+        </LinearLayout>
+
+        <!-- Pitcher Select -->
+        <LinearLayout
+            android:id="@+id/layoutPitcherList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="invisible">
+
+            <Spinner
+                android:id="@+id/spinnerSelectPitcher"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="0dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginRight="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toBottomOf="@+id/radiogroupSelectBatPitch" />
+
+            <Button
+                android:id="@+id/buttonAddPitcherPopup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginTop="200dp"
+                android:fontFamily="@font/bccardlight"
+                android:background="@color/main_color"
+                android:text="@string/addplayer_popup_title" />
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="284dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
