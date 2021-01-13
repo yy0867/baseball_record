@@ -27,9 +27,8 @@ public class AddPlayerPopupActivity extends AppCompatActivity {
     LinearLayout batterListLayout, pitcherListLayout;
 
     final int nothingSelected = -10;
-    String addBatterName;
+    Person addBatterName, addPitcherName;
     int addBatterOrder = nothingSelected;
-    String addPitcherName = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +44,8 @@ public class AddPlayerPopupActivity extends AppCompatActivity {
         pitcherListSpinner = findViewById(R.id.spinnerSelectPitcher);
         batterListLayout = findViewById(R.id.layoutBatterList);
         pitcherListLayout = findViewById(R.id.layoutPitcherList);
+        addBatterName = null;
+        addPitcherName = null;
 
         convertPersonListToString();
         setAdapters();
@@ -66,25 +67,60 @@ public class AddPlayerPopupActivity extends AppCompatActivity {
         });
 
         //Select Batter
-        addBatterName = batterListSpinner.getSelectedItem().toString();
-        addBatterName = addBatterName.substring(0, addBatterName.lastIndexOf(" ") - 1);
+        batterListSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                addBatterName = batterInfo.get(position);
+            }
 
-        String addBatterOrderString = battingOrderSpinner.getSelectedItem().toString();
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                addBatterName = null;
+            }
+        });
 
-        if (addBatterOrderString.contains("타자"))
-            addBatterOrder = Integer.parseInt(addBatterOrderString.replace("번 타자", ""));
-        else if(addBatterOrderString.equals("대타"))
-            addBatterOrder = -1;
+        //Select Batting Order
+
+        battingOrderSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            String addBatterOrderString;
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                addBatterOrderString = parent.getItemAtPosition(position).toString();
+
+                if (addBatterOrderString.contains("타자"))
+                    addBatterOrder = Integer.parseInt(addBatterOrderString.replace("번 타자", ""));
+                else if(addBatterOrderString.equals("대타"))
+                    addBatterOrder = -1;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                addBatterOrder = nothingSelected;
+            }
+        });
 
         //Select Pitcher
+        pitcherListSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                addPitcherName = pitcherInfo.get(position);
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                addPitcherName = null;
+            }
+        });
     }
 
     private void setAdapters() {
         infoAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, batterString);
+        infoAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         batterListSpinner.setAdapter(infoAdapter);
 
         infoAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, pitcherString);
+        infoAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         pitcherListSpinner.setAdapter(infoAdapter);
     }
 
@@ -104,7 +140,7 @@ public class AddPlayerPopupActivity extends AppCompatActivity {
     }
 
     public void buttonAddBatterClicked(View v) {
-        if (addBatterName.isEmpty()) {
+        if (addBatterName == null) {
             Toast.makeText(this, "타자를 선택해주세요!", Toast.LENGTH_SHORT).show();
             return;
         } else if (addBatterOrder == nothingSelected) {
@@ -114,7 +150,7 @@ public class AddPlayerPopupActivity extends AppCompatActivity {
 
         Intent intent = new Intent(getApplicationContext(), PlayGameActivity.class);
         intent.putExtra("isBatter", true);
-        intent.putExtra("batterName", addBatterName);
+        intent.putExtra("batter", addBatterName);
         intent.putExtra("batterOrder", addBatterOrder);
 
         setResult(RESULT_OK, intent);
@@ -122,14 +158,14 @@ public class AddPlayerPopupActivity extends AppCompatActivity {
     }
 
     public void buttonAddPitcherClicked(View v) {
-        if (addPitcherName.isEmpty()) {
+        if (addPitcherName == null) {
             Toast.makeText(this, "투수를 선택해주세요!", Toast.LENGTH_SHORT).show();
             return;
         }
 
         Intent intent = new Intent(getApplicationContext(), PlayGameActivity.class);
         intent.putExtra("isBatter", false);
-        intent.putExtra("pitcherName", addPitcherName);
+        intent.putExtra("pitcher", addPitcherName);
 
         setResult(RESULT_OK, intent);
         finish();

@@ -303,10 +303,13 @@ public class PlayGameActivity extends AppCompatActivity {
         if (requestCode == 1 && resultCode == RESULT_OK) {
             //parse Intent data from popup
             if(data.getBooleanExtra("isBatter", true)) {
-                Toast.makeText(this, data.getStringExtra("batterName") + "  " +
-                        data.getIntExtra("batterOrder", 0), Toast.LENGTH_SHORT).show();
+                //add batter
+                Person p = (Person) data.getExtras().getSerializable("batter");
+                Toast.makeText(this, p.getName() + " " + data.getIntExtra("batterOrder", 0), Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this, data.getStringExtra("pitcherName"), Toast.LENGTH_SHORT).show();
+                //add pitcher
+                Person p = (Person) data.getExtras().getSerializable("pitcher");
+                Toast.makeText(this, p.getName(), Toast.LENGTH_SHORT).show();
             }
         }
     }
