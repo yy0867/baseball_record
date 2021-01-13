@@ -29,7 +29,7 @@ public class AddPlayerPopupActivity extends AppCompatActivity {
     final int nothingSelected = -10;
     String addBatterName;
     int addBatterOrder = nothingSelected;
-    String addPitcherName;
+    String addPitcherName = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,6 +113,7 @@ public class AddPlayerPopupActivity extends AppCompatActivity {
         }
 
         Intent intent = new Intent(getApplicationContext(), PlayGameActivity.class);
+        intent.putExtra("isBatter", true);
         intent.putExtra("batterName", addBatterName);
         intent.putExtra("batterOrder", addBatterOrder);
 
@@ -127,6 +128,8 @@ public class AddPlayerPopupActivity extends AppCompatActivity {
         }
 
         Intent intent = new Intent(getApplicationContext(), PlayGameActivity.class);
+        intent.putExtra("isBatter", false);
+        intent.putExtra("pitcherName", addPitcherName);
 
         setResult(RESULT_OK, intent);
         finish();
