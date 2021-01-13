@@ -5,11 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -23,6 +25,11 @@ public class AddPlayerPopupActivity extends AppCompatActivity {
     Spinner batterListSpinner, battingOrderSpinner;
     Spinner pitcherListSpinner;
     LinearLayout batterListLayout, pitcherListLayout;
+
+    final int nothingSelected = -10;
+    String addBatterName;
+    int addBatterOrder = nothingSelected;
+    String addPitcherName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +49,7 @@ public class AddPlayerPopupActivity extends AppCompatActivity {
         convertPersonListToString();
         setAdapters();
 
+        //Select Batter / Pitcher Radio
         selectPosition.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -56,6 +64,20 @@ public class AddPlayerPopupActivity extends AppCompatActivity {
                 }
             }
         });
+
+        //Select Batter
+        addBatterName = batterListSpinner.getSelectedItem().toString();
+        addBatterName = addBatterName.substring(0, addBatterName.lastIndexOf(" ") - 1);
+
+        String addBatterOrderString = battingOrderSpinner.getSelectedItem().toString();
+
+        if (addBatterOrderString.contains("타자"))
+            addBatterOrder = Integer.parseInt(addBatterOrderString.replace("번 타자", ""));
+        else if(addBatterOrderString.equals("대타"))
+            addBatterOrder = -1;
+
+        //Select Pitcher
+
     }
 
     private void setAdapters() {
@@ -79,5 +101,34 @@ public class AddPlayerPopupActivity extends AppCompatActivity {
         for (Person p : pitcherInfo) {
             pitcherString.add(p.getName() + "  (" + p.getBackNum() + "번)   " + "[" + p.getPosition() + "]");
         }
+    }
+
+    public void buttonAddBatterClicked(View v) {
+        if (addBatterName.isEmpty()) {
+            Toast.makeText(this, "타자를 선택해주세요!", Toast.LENGTH_SHORT).show();
+            return;
+        } else if (addBatterOrder == nothingSelected) {
+            Toast.makeText(this, "타순을 선택해주세요!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Intent intent = new Intent(getApplicationContext(), PlayGameActivity.class);
+        intent.putExtra("batterName", addBatterName);
+        intent.putExtra("batterOrder", addBatterOrder);
+
+        setResult(RESULT_OK, intent);
+        finish();
+    }
+
+    public void buttonAddPitcherClicked(View v) {
+        if (addPitcherName.isEmpty()) {
+            Toast.makeText(this, "투수를 선택해주세요!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Intent intent = new Intent(getApplicationContext(), PlayGameActivity.class);
+
+        setResult(RESULT_OK, intent);
+        finish();
     }
 }

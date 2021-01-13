@@ -81,12 +81,14 @@
 
             <Button
                 android:id="@+id/buttonAddBatterPopup"
+                android:onClick="buttonAddBatterClicked"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:layout_marginTop="150dp"
                 android:fontFamily="@font/bccardlight"
                 android:background="@color/main_color"
+                android:textColor="@color/white"
                 android:text="@string/addplayer_popup_title" />
 
         </LinearLayout>
@@ -114,12 +116,14 @@
 
             <Button
                 android:id="@+id/buttonAddPitcherPopup"
+                android:onClick="buttonAddPitcherClicked"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:layout_marginTop="200dp"
                 android:fontFamily="@font/bccardlight"
                 android:background="@color/main_color"
+                android:textColor="@color/white"
                 android:text="@string/addplayer_popup_title" />
 
         </LinearLayout>
