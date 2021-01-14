@@ -5,6 +5,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
@@ -30,6 +31,7 @@ public class PlayGameActivity extends AppCompatActivity {
     boolean isDefense;
     TextView textBatPitch;
     ImageView outCounts;
+    Button buttonOut;
     SwitchCompat switchBatPitch;
     Typeface font, boldfont;
     TableRow rowInnings, rowHomeTeam, rowAwayTeam;
@@ -46,6 +48,8 @@ public class PlayGameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_game);
 
+        Toast.makeText(this, "아웃 버튼을 길게 누르면 희생플라이입니다.", Toast.LENGTH_LONG).show();
+
         Intent intent = getIntent();
         batterInfo = new ArrayList<>();
         pitcherInfo = new ArrayList<>();
@@ -58,6 +62,7 @@ public class PlayGameActivity extends AppCompatActivity {
         pitcherLayout = findViewById(R.id.layoutPitcher);
         batterListLayout = findViewById(R.id.tablelayoutBatter);
         pitcherListLayout = findViewById(R.id.tablelayoutPitcher);
+        buttonOut = findViewById(R.id.buttonOut);
 
         newGame = (Game)intent.getSerializableExtra("objectGame");
         font = Typeface.createFromAsset(getAssets(), "font/bccardlight.ttf");
@@ -80,6 +85,16 @@ public class PlayGameActivity extends AppCompatActivity {
         rowHomeTeam = findViewById(R.id.tablerowHomeTeam);
         rowAwayTeam = findViewById(R.id.tablerowAwayTeam);
         setScoreBoards();
+
+        buttonOut.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                //sacrificeFly
+
+
+                return true; //block onClick
+            }
+        });
     }
 
     private void changeBatPitchView() {

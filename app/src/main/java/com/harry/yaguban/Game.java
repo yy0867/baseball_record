@@ -16,6 +16,8 @@ public class Game implements Serializable {
         curBatter = 1;
         scoreHome = new int[inning];
         scoreAway = new int[inning];
+        batter = new Person[maxBatter];
+        pitcher = new Person[maxPitcher];
         curAttackTeam = away;
     }
 
@@ -80,6 +82,7 @@ public class Game implements Serializable {
     //variables
     static final int inning = 9;
     static final int maxBatter = 9;
+    static final int maxPitcher = 9;
     static final int maxOut = 3;
     static final boolean home = true;
     static final boolean away = false;
@@ -95,4 +98,6 @@ public class Game implements Serializable {
     private int curBatter;
     private boolean curAttackTeam;
     private final Date date;
+    private Person[] batter;
+    private Person[] pitcher;
 }

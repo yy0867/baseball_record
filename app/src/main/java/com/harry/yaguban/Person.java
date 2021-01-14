@@ -25,6 +25,8 @@ public class Person implements Serializable {
         return personName+"\n"+position+"\n"+backNum+"\n";
     }
 
+    //
+
     private String personName;
     private String position;
     private String backNum;
