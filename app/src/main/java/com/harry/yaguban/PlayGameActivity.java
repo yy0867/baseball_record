@@ -211,43 +211,71 @@ public class PlayGameActivity extends AppCompatActivity {
 
     //안타
     public void hit1Clicked(View v) {
-        newGame.getCurBatter().batter.increaseHit();
+        try {
+            newGame.getCurBatter().batter.increaseHit();
+        } catch (NullPointerException e) {
+            Toast.makeText(this, "타자를 추가해주세요", Toast.LENGTH_SHORT).show();
+        }
     }
 
     //2루타
     public void hit2Clicked(View v) {
-        newGame.getCurBatter().batter.increaseHit2();
+        try {
+            newGame.getCurBatter().batter.increaseHit2();
+        } catch (NullPointerException e) {
+            Toast.makeText(this, "타자를 추가해주세요", Toast.LENGTH_SHORT).show();
+        }
     }
 
     //3루타
     public void hit3Clicked(View v) {
-        newGame.getCurBatter().batter.increaseHit3();
+        try {
+            newGame.getCurBatter().batter.increaseHit3();
+        } catch (NullPointerException e) {
+            Toast.makeText(this, "타자를 추가해주세요", Toast.LENGTH_SHORT).show();
+        }
     }
 
     //홈런
     public void homerunClicked(View v) {
-        newGame.getCurBatter().batter.increaseHomerun();
+        try {
+            newGame.getCurBatter().batter.increaseHomerun();
 
-        Toast.makeText(this, "득점 수만큼 타점 버튼을 눌러주세요", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "득점 수만큼 타점 버튼을 눌러주세요", Toast.LENGTH_SHORT).show();
+        } catch (NullPointerException e) {
+            Toast.makeText(this, "타자를 추가해주세요", Toast.LENGTH_SHORT).show();
+        }
     }
 
     //볼넷
     public void ball4Clicked(View v) {
-        newGame.getCurBatter().batter.increaseBall4();
+        try {
+            newGame.getCurBatter().batter.increaseBall4();
+        } catch (NullPointerException e) {
+            Toast.makeText(this, "타자를 추가해주세요", Toast.LENGTH_SHORT).show();
+        }
     }
 
     //삼진
     public void strikeoutClicked(View v) {
-        newGame.increaseOut();
-        changeOutDrawables();
-        newGame.getCurBatter().batter.increaseStrikeOut();
+        try {
+            newGame.increaseOut();
+            changeOutDrawables();
+            newGame.getCurBatter().batter.increaseStrikeOut();
+        } catch (NullPointerException e) {
+            Toast.makeText(this, "타자를 추가해주세요", Toast.LENGTH_SHORT).show();
+        }
     }
 
     //타점
     public void RBIClicked(View v) {
-        newGame.getCurBatter().batter.increaseRBI();
-        newGame.setScoreHome();
-        reloadScoreBoard();
+        try {
+            newGame.getCurBatter().batter.increaseRBI();
+            newGame.setScoreHome();
+            reloadScoreBoard();
+        } catch (NullPointerException e) {
+            Toast.makeText(this, "타자를 추가해주세요", Toast.LENGTH_SHORT).show();
+        }
     }
 
     //아웃

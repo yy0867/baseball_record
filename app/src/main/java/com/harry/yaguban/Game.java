@@ -53,7 +53,12 @@ public class Game implements Serializable {
     public Person getCurBatter() throws NullPointerException {
         return batterList[curBattingOrder];
     }
-    public Person getCurPitcher() { return pitcherList.lastElement(); }
+    public Person getCurPitcher() {
+        if (pitcherList.isEmpty()) {
+            throw new NullPointerException();
+        }
+        return pitcherList.lastElement();
+    }
 
     public void addNewBatter(Person p) {
         batterList[curBattingOrder] = p;
