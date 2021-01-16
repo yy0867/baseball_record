@@ -35,6 +35,7 @@ public class PlayGameActivity extends AppCompatActivity {
     SwitchCompat switchBatPitch;
     Typeface font, boldfont;
     TableRow rowInnings, rowHomeTeam, rowAwayTeam;
+    TableRow batterRow, pitcherRow;
     LinearLayout batterLayout, pitcherLayout;
     TableLayout batterListLayout, pitcherListLayout;
 
@@ -47,8 +48,6 @@ public class PlayGameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_game);
-
-        Toast.makeText(this, "아웃 버튼을 길게 누르면 희생플라이입니다.", Toast.LENGTH_LONG).show();
 
         Intent intent = getIntent();
         batterInfo = new ArrayList<>();
@@ -90,19 +89,24 @@ public class PlayGameActivity extends AppCompatActivity {
             @Override
             public boolean onLongClick(View v) {
                 //sacrificeFly
-
-
+                newGame.getCurBatter().batter.increaseSacrificeFly();
+                newGame.increaseOut();
+                changeOutDrawables();
                 return true; //block onClick
             }
         });
     }
 
+
+
     private void changeBatPitchView() {
         if (isDefense) {
+            Toast.makeText(this, "수비 실책: 실책으로 인한 실점", Toast.LENGTH_SHORT).show();
             textBatPitch.setText("투수");
             batterLayout.setVisibility(View.INVISIBLE);
             pitcherLayout.setVisibility(View.VISIBLE);
         } else {
+            Toast.makeText(this, "아웃 버튼을 길게 누르면 희생플라이입니다.", Toast.LENGTH_SHORT).show();
             textBatPitch.setText("타자");
             batterLayout.setVisibility(View.VISIBLE);
             pitcherLayout.setVisibility(View.INVISIBLE);
@@ -207,98 +211,95 @@ public class PlayGameActivity extends AppCompatActivity {
 
     //안타
     public void hit1Clicked(View v) {
-        Toast.makeText(this, "안타!", Toast.LENGTH_SHORT).show();
+        newGame.getCurBatter().batter.increaseHit();
     }
 
     //2루타
     public void hit2Clicked(View v) {
-        Toast.makeText(this, "2루타!", Toast.LENGTH_SHORT).show();
+        newGame.getCurBatter().batter.increaseHit2();
     }
 
     //3루타
     public void hit3Clicked(View v) {
-        Toast.makeText(this, "3루타!", Toast.LENGTH_SHORT).show();
+        newGame.getCurBatter().batter.increaseHit3();
     }
 
     //홈런
     public void homerunClicked(View v) {
-        if(newGame.getCurAttackTeam() == Game.away) {
-            newGame.setScoreAway();
-        } else {
-            newGame.setScoreHome();
-        }
-        reloadScoreBoard();
+        newGame.getCurBatter().batter.increaseHomerun();
 
-        Toast.makeText(this, "홈런!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "득점 수만큼 타점 버튼을 눌러주세요", Toast.LENGTH_SHORT).show();
     }
 
     //볼넷
     public void ball4Clicked(View v) {
-        Toast.makeText(this, "볼넷!", Toast.LENGTH_SHORT).show();
+        newGame.getCurBatter().batter.increaseBall4();
     }
 
     //삼진
     public void strikeoutClicked(View v) {
-        Toast.makeText(this, "삼진!", Toast.LENGTH_SHORT).show();
+        newGame.increaseOut();
+        changeOutDrawables();
+        newGame.getCurBatter().batter.increaseStrikeOut();
     }
 
     //타점
     public void RBIClicked(View v) {
-        Toast.makeText(this, "타점!", Toast.LENGTH_SHORT).show();
+        newGame.getCurBatter().batter.increaseRBI();
+        newGame.setScoreHome();
+        reloadScoreBoard();
     }
 
     //아웃
     public void outClicked(View v) {
         newGame.increaseOut();
-
-        if(newGame.getCurOut() == 0)
-            outCounts.setImageResource(R.drawable.out_0);
-        else if(newGame.getCurOut() == 1)
-            outCounts.setImageResource(R.drawable.out_1);
-        else if(newGame.getCurOut() == 2)
-            outCounts.setImageResource(R.drawable.out_2);
-        else if(newGame.getCurOut() == 3)
-            outCounts.setImageResource(R.drawable.out_3);
-        reloadScoreBoard();
-
-        Toast.makeText(this, "아웃!", Toast.LENGTH_SHORT).show();
+        changeOutDrawables();
     }
     // --------------------------------- for Batters ------------------------------------
+
     // --------------------------------- for Pitchers ------------------------------------
 
     //삼진
     public void strikeoutPitcherClicked(View v) {
-
+        newGame.getCurPitcher().pitcher.increaseStrikeOut();
+        newGame.getCurPitcher().pitcher.increaseInnings();
+        newGame.increaseOut();
+        changeOutDrawables();
     }
 
     //볼넷
     public void ball4PitcherClicked(View v) {
-
+        newGame.getCurPitcher().pitcher.increaseBall4();
     }
 
     //피안타
     public void hittedClicked(View v) {
-
+        newGame.getCurPitcher().pitcher.increaseAllowHit();
     }
 
     //수비 실책
     public void defErrorClicked(View v) {
-
+        newGame.setScoreAway();
+        reloadScoreBoard();
     }
 
     //아웃
     public void outPitcherClicked(View v) {
-
+        newGame.getCurPitcher().pitcher.increaseInnings();
+        newGame.increaseOut();
+        changeOutDrawables();
     }
 
     //실점
     public void losePointClicked(View v) {
-
+        newGame.getCurPitcher().pitcher.increaseLosePoint();
+        newGame.setScoreAway();
+        reloadScoreBoard();
     }
 
     //투구 수
     public void numPitchesClicked(View v) {
-
+        newGame.getCurPitcher().pitcher.increasePitchCount();
     }
     // --------------------------------- for Pitchers ------------------------------------
 
@@ -311,48 +312,90 @@ public class PlayGameActivity extends AppCompatActivity {
         startActivityForResult(popupIntent, 1);
     }
 
+    private void changeOutDrawables() {
+        if(newGame.getCurOut() == 0)
+            outCounts.setImageResource(R.drawable.out_0);
+        else if(newGame.getCurOut() == 1)
+            outCounts.setImageResource(R.drawable.out_1);
+        else if(newGame.getCurOut() == 2)
+            outCounts.setImageResource(R.drawable.out_2);
+        else if(newGame.getCurOut() == 3)
+            outCounts.setImageResource(R.drawable.out_3);
+        reloadScoreBoard();
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if(data == null) return;
 
         if (requestCode == 1 && resultCode == RESULT_OK) {
             //parse Intent data from popup
             if(data.getBooleanExtra("isBatter", true)) {
                 //add batter
                 Person p = (Person) data.getExtras().getSerializable("batter");
+                newGame.addNewBatter(p);
+                //show list on batter table
+
                 Toast.makeText(this, p.getName() + " " + data.getIntExtra("batterOrder", 0), Toast.LENGTH_SHORT).show();
             } else {
                 //add pitcher
                 Person p = (Person) data.getExtras().getSerializable("pitcher");
+                newGame.addNewPitcher(p);
+                //show list on pitcher table
+
                 Toast.makeText(this, p.getName(), Toast.LENGTH_SHORT).show();
             }
         }
     }
 
-    /*
-    public void SelectDateClicked(View v) {
-        //show popup
-        Intent popupIntent = new Intent(this, DateSelectPopupActivity.class);
-        popupIntent.putExtra("title", "날짜 선택");
-        startActivityForResult(popupIntent, 1);
-    }
+    //Initialize Batter & Pitcher Table Rows
+    private void initBatterRows() {
+        TableRow.LayoutParams params = new TableRow.LayoutParams();
+        params.width = TableRow.LayoutParams.MATCH_PARENT;
+        params.height = batterListLayout.getHeight() / (Game.maxBatter + 1);
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+        TextView nameTitle = new TextView(this);
+        nameTitle.setText("이름 (등번호)");
+        TextView positionTitle = new TextView(this);
+        positionTitle.setText("포지션");
+        TextView hitTitle = new TextView(this);
+        hitTitle.setText("안타");
+        TextView scoreTitle = new TextView(this);
+        scoreTitle.setText("타점");
 
-        if (requestCode == 1) {
-            if (resultCode == RESULT_OK) {
-                gameDate = new Date();
-                gameDate.setYear(data.getIntExtra("year", 0) - 1900);
-                gameDate.setMonth(data.getIntExtra("month", 0));
-                gameDate.setDate(data.getIntExtra("day", 0));
+        TableRow batterTitle = new TableRow(this);
+        batterTitle.addView(nameTitle);
+        batterTitle.addView(positionTitle);
+        batterTitle.addView(hitTitle);
+        batterTitle.addView(scoreTitle);
 
-                dateSelectText.setText(getDateString(gameDate));
-            }
+        batterListLayout.addView(batterTitle);
+
+        for (int i = 0; i < Game.maxBatter; i++) {
+            batterRow = new TableRow(this);
+
+            TextView name = new TextView(this); //name: [name (backNumber)]
+            TextView position = new TextView(this);
+            TextView hit = new TextView(this);
+            TextView score = new TextView(this);
+
+            batterRow.addView(name);
+            batterRow.addView(position);
+            batterRow.addView(hit);
+            batterRow.addView(score);
+
+            batterListLayout.addView(batterRow);
         }
+
+        /*for (int i = 0; i < Game.maxPitcher; i++) {
+            pitcherRow = new TableRow(this);
+
+            TextView name = new TextView(this); //name: [name (backNumber)]
+            TextView hitted = new TextView(this);
+            TextView losePoint = new TextView(this);
+        }*/
     }
-*/
 
     //투타 변경
     public void batPitchSwitchClicked(View v) {

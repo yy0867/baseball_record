@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Vector;
 
 public class Game implements Serializable {
     public Game(String homeTeam, String awayTeam, Date date) {
@@ -13,11 +14,11 @@ public class Game implements Serializable {
         this.awayTeam = awayTeam;
         curInning = 0;
         curOut = 0;
-        curBatter = 1;
+        curBattingOrder = 1;
         scoreHome = new int[inning];
         scoreAway = new int[inning];
-        batter = new Person[maxBatter];
-        pitcher = new Person[maxPitcher];
+        batterList = new Person[maxBatter];
+        pitcherList = new Vector<>();
         curAttackTeam = away;
     }
 
@@ -46,7 +47,21 @@ public class Game implements Serializable {
     public String getHomeTeam() { return homeTeam; }
     public String getAwayTeam() { return awayTeam; }
     public String getOpponentTeam() { return homeTeam.equals(ourTeam) ? awayTeam : homeTeam; }
-    public int getCurBatter() { return curBatter; }
+
+    //for Player add / delete / getter
+    public int getCurBattingOrder() { return curBattingOrder; }
+    public Person getCurBatter() throws NullPointerException {
+        return batterList[curBattingOrder];
+    }
+    public Person getCurPitcher() { return pitcherList.lastElement(); }
+
+    public void addNewBatter(Person p) {
+        batterList[curBattingOrder] = p;
+    }
+
+    public void addNewPitcher(Person p) {
+        pitcherList.add(p);
+    }
 
     //Setter
     public void setScoreHome() { scoreHome[curInning]++; }
@@ -55,6 +70,7 @@ public class Game implements Serializable {
 
     //public Func
     public void increaseOut() {
+        nextBatter();
         if (curOut == 0 || curOut == 1) {
             plusOut(); // just increase 1 out
         } else if (curOut == 2) {
@@ -70,7 +86,7 @@ public class Game implements Serializable {
 
     public void nextBatter() {
         if (getOurStatus() == attack)
-            curBatter = (curBatter + 1) % maxBatter;
+            curBattingOrder = (curBattingOrder + 1) % maxBatter;
     }
 
     //private Func
@@ -95,9 +111,9 @@ public class Game implements Serializable {
     private int[] scoreAway;
     private int curInning;
     private int curOut;
-    private int curBatter;
+    private int curBattingOrder;
     private boolean curAttackTeam;
     private final Date date;
-    private Person[] batter;
-    private Person[] pitcher;
+    private Person[] batterList;
+    private Vector<Person> pitcherList;
 }

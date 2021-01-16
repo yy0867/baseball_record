@@ -137,6 +137,8 @@ public class ManageActivity extends AppCompatActivity{
                 String backNum=bNum.getText().toString();
                 if(!name.equals("") && !backNum.equals("")) {
                     person = new Person(name, position, backNum);
+                    person.batter = new Batter();
+                    person.pitcher = new Pitcher();
                     person_info.add(person);
                     addOnePerson();
                     savePersonList();

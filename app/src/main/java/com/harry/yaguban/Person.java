@@ -3,6 +3,7 @@ package com.harry.yaguban;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
+import java.io.PipedReader;
 import java.io.Serializable;
 
 public class Person implements Serializable {
@@ -25,7 +26,13 @@ public class Person implements Serializable {
         return personName+"\n"+position+"\n"+backNum+"\n";
     }
 
-    //
+    public boolean isBatter() {
+        return !position.equals("투수");
+    }
+
+    //record var
+    public Batter batter;
+    public Pitcher pitcher;
 
     private String personName;
     private String position;
